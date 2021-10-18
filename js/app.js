@@ -76,12 +76,12 @@ function render(cardPicked) {
   if (playerOneVsCard.length > 1) {
     
     plyOneVsEl.classList.remove(cardToRemove)
-    console.log(cardToRemove)
+    // console.log(cardToRemove)
   }
   cardToRemove = cardPicked
 
   plyOneVsEl.classList.add(cardPicked)
-  console.log(plyOneVsEl)
+  // console.log(plyOneVsEl)
 
 }
 
@@ -89,15 +89,15 @@ function handleClickTwo() {
 
   if(playerTwoPlayableDeck.length > 0) {
     // console.log(playerTwoPlayableDeck)
-    let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
+    let randomIdxTwo = Math.ceil(Math.random()*playerTwoPlayableDeck.length)
     // console.log(randomIdx)
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
     // console.log(cardPicked)
     playerTwoVsCard.push(cardPickedTwo)
 
     renderTwo(cardPickedTwo)
-    
     vsCard()
+    
   }
 }
 
@@ -118,17 +118,24 @@ function renderTwo(cardPickedTwo) {
   cardToRemoveTwo = cardPickedTwo
 
   plyTwoVsEl.classList.add(cardPickedTwo)
-  console.log(plyTwoVsEl)
+  // console.log(plyTwoVsEl)
 
 }
 
 
 function vsCard() {
-  // for (let i = 0; i < deck.length; i++) {
-  // console.log(deck)
-    
-  // }
-  playerOne = playerOneVsCard
-// console.log(playerOne)
-// console.log(playerOneVsCard)
+  console.log("PLAYER ONE VS CARD: ", playerOneVsCard)
+  console.log("PLAYER ONE VS CARD AT 0: ", playerOneVsCard[0])
+  console.log("PLAYER ONE VS CARD AT 0 AT 0: ", playerOneVsCard[0][0])
+  console.log("PLAYER Two VS CARD: ", playerTwoVsCard)
+  console.log("PLAYER Two VS CARD AT 0: ", playerTwoVsCard[0])
+  console.log("PLAYER Two VS CARD AT 0 AT 0: ", playerTwoVsCard[0][0])
+ let playerOneValue = parseInt(playerOneVsCard[0][0].slice(1))
+ let playerTwoValue = parseInt(playerTwoVsCard[0][0].slice(1))
+  console.log(playerOneValue)
+  console.log(playerTwoValue)
+  // playerOneVsCard.splice(0, 1)
+  // playerOne = playerOneVsCard
+//   parseInt(playerOneVsCard)
+// console.log(parseInt(playerOneVsCard))
 }
