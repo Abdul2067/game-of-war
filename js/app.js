@@ -17,14 +17,14 @@ plyOneVsEl = document.querySelector("#player-one-vs-card")
 plyTwoVsEl = document.querySelector("#player-two-vs-card")
 
 // console.log(plyOnePlayEl)
-
+// console.log(plyOneVsEl)
+// console.log(plyTwoVsEl)
 /*----------------------------- Event Listeners -----------------------------*/
 
 plyOnePlayEl.addEventListener("click", handleClick)
-// plyTwoPlayEl.addEventListener("click", handleClickTwo)
+plyTwoPlayEl.addEventListener("click", handleClickTwo)
 
 /*-------------------------------- Functions --------------------------------*/
-init()
 
 
 function init() {
@@ -37,7 +37,6 @@ function init() {
   isWinner = null
 
   splitDeck()
-  handleClick()
 }
 
 function splitDeck() {
@@ -63,28 +62,67 @@ function handleClick() {
 }
 
 function render(cardPicked) {
+  if (playerOnePlayableDeck.length === 0) {
+    plyOnePlayEl.classList.remove("back-blue")
+    plyOnePlayEl.classList.remove("shadow")
+    plyOnePlayEl.classList.add("outline")
+  }
   if (playerOneVsCard.length === 1) {
     plyOneVsEl.classList.remove("outline")
+
   }
   if (playerOneVsCard.length > 1) {
     plyOneVsEl.classList.remove(cardToRemove)
+
   }
   cardToRemove = cardPicked
 
   plyOneVsEl.classList.add(cardPicked)
+  console.log(plyOneVsEl)
+
+}
+
+function handleClickTwo() {
+
+  if(playerTwoPlayableDeck.length > 0) {
+    // console.log(playerTwoPlayableDeck)
+    let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
+    // console.log(randomIdx)
+    let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
+    // console.log(cardPicked)
+    playerTwoVsCard.push(cardPickedTwo)
+
+    cardToRemoveTwo = cardPickedTwo
+
+    renderTwo(cardPickedTwo)
+
+  }
+}
+
+function renderTwo(cardPickedTwo) {
+  if (playerTwoPlayableDeck.length === 0) {
+    plyTwoPlayEl.classList.remove("back-blue")
+    plyTwoPlayEl.classList.remove("shadow")
+    plyTwoPlayEl.classList.add("outline")
+  }
+  if (playerTwoVsCard.length === 1) {
+    plyTwoVsEl.classList.remove("outline")
+
+  }
+  if (playerTwoVsCard.length > 1) {
+    plyTwoVsEl.classList.remove(cardToRemoveTwo)
+  }
+  //cardToRemoveTwo = cardPickedTwo
+
+  plyTwoVsEl.classList.add(cardPickedTwo)
+  console.log(plyTwoVsEl)
+
 }
 
 
-
-
-
-
+init()
 
 
 // function determineWinner() {
 
 // }
-
-
-
-init()
