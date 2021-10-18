@@ -25,7 +25,7 @@ plyOnePlayEl.addEventListener("click", handleClick)
 plyTwoPlayEl.addEventListener("click", handleClickTwo)
 
 /*-------------------------------- Functions --------------------------------*/
-
+init()
 
 function init() {
   playerOnePlayableDeck = []
@@ -58,6 +58,8 @@ function handleClick() {
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
     playerOneVsCard.push(cardPicked)
     render(cardPicked)
+    vsCard()
+    // console.log(playerOneVsCard)
   }
 }
 
@@ -72,8 +74,9 @@ function render(cardPicked) {
 
   }
   if (playerOneVsCard.length > 1) {
+    
     plyOneVsEl.classList.remove(cardToRemove)
-
+    console.log(cardToRemove)
   }
   cardToRemove = cardPicked
 
@@ -92,10 +95,9 @@ function handleClickTwo() {
     // console.log(cardPicked)
     playerTwoVsCard.push(cardPickedTwo)
 
-    cardToRemoveTwo = cardPickedTwo
-
     renderTwo(cardPickedTwo)
-
+    
+    vsCard()
   }
 }
 
@@ -111,8 +113,9 @@ function renderTwo(cardPickedTwo) {
   }
   if (playerTwoVsCard.length > 1) {
     plyTwoVsEl.classList.remove(cardToRemoveTwo)
+    // console.log(cardToRemoveTwo)
   }
-  //cardToRemoveTwo = cardPickedTwo
+  cardToRemoveTwo = cardPickedTwo
 
   plyTwoVsEl.classList.add(cardPickedTwo)
   console.log(plyTwoVsEl)
@@ -120,9 +123,12 @@ function renderTwo(cardPickedTwo) {
 }
 
 
-init()
-
-
-// function determineWinner() {
-
-// }
+function vsCard() {
+  // for (let i = 0; i < deck.length; i++) {
+  // console.log(deck)
+    
+  // }
+  playerOne = playerOneVsCard
+// console.log(playerOne)
+// console.log(playerOneVsCard)
+}
