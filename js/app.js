@@ -54,7 +54,7 @@ function handleClick() {
   if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) {
 
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
-
+    console.log(playerOnePlayableDeck)
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
 
     playerOneVsCard = cardPicked[0]
@@ -66,6 +66,7 @@ function handleClick() {
 
 function render(cardPicked) {
   let cardToRemove = null
+  console.log(cardPicked)
 
   if (playerOnePlayableDeck.length === 0) {
     plyOnePlayEl.classList.remove("back-blue")
@@ -91,10 +92,11 @@ function handleClickTwo() {
   if(playerTwoPlayableDeck.length > 0 && playerTwoVsCard === undefined) {
 
     let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
-
+    console.log(playerTwoPlayableDeck)
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
 
     playerTwoVsCard = cardPickedTwo[0]
+
     renderTwo(cardPickedTwo)
     checkValid()
     
@@ -103,6 +105,7 @@ function handleClickTwo() {
 
 function renderTwo(cardPickedTwo) {
   let cardToRemoveTwo = null
+  console.log(cardPickedTwo)
 
   if (playerTwoPlayableDeck.length === 0) {
     plyTwoPlayEl.classList.remove("back-blue")
@@ -138,45 +141,73 @@ function vsCard() {
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
 
   }
-
+  
   cleanUpVs()
+  // collAndPlaySwap()
 }
 
 function cleanUpVs() {
     setTimeout(function() {
       if(playerOneCollectedCards.length > 0){
-
-      plyOneCollEl.classList.remove("outline")
-      plyOneCollEl.classList.add("back-blue")
-      plyOneCollEl.classList.add("shadow")
-      plyOneVsEl.classList.remove(playerOneVsCard)
-      plyTwoVsEl.classList.remove(playerTwoVsCard)
-      plyOneVsEl.classList.add("outline")
-      plyTwoVsEl.classList.add("outline")
+        plyOneCollEl.classList.remove("outline")
+        plyOneCollEl.classList.add("back-blue")
+        plyOneCollEl.classList.add("shadow")
+        plyOneVsEl.classList.remove(playerOneVsCard)
+        plyTwoVsEl.classList.remove(playerTwoVsCard)
+        plyOneVsEl.classList.add("outline")
+        plyTwoVsEl.classList.add("outline")
       }
       if(playerTwoCollectedCards.length > 0) {
-
-      plyTwoCollEl.classList.remove("outline")
-      plyTwoCollEl.classList.add("back-blue")
-      plyTwoCollEl.classList.add("shadow")
-      plyTwoVsEl.classList.remove(playerTwoVsCard)
-      plyOneVsEl.classList.remove(playerOneVsCard)
-      plyOneVsEl.classList.add("outline")
-      plyTwoVsEl.classList.add("outline")
+        plyTwoCollEl.classList.remove("outline")
+        plyTwoCollEl.classList.add("back-blue")
+        plyTwoCollEl.classList.add("shadow")
+        plyTwoVsEl.classList.remove(playerTwoVsCard)
+        plyOneVsEl.classList.remove(playerOneVsCard)
+        plyOneVsEl.classList.add("outline")
+        plyTwoVsEl.classList.add("outline")
       }
+      collAndPlaySwap()
+
 
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
-    }, 1500)
+    }, 500)
 }
 
 function collAndPlaySwap() {
-  if(playerOnePlayableDeck === []) {
-    playerOnePlayableDeck.push(playerOneCollectedCards)
+  console.log("this function is running")
+  if(playerOnePlayableDeck.length < 1) {
+    playerOnePlayableDeck = playerOneCollectedCards
+    console.log("hitting 1")
+    console.log(playerOnePlayableDeck)
+    playerOneCollectedCards = []
+    console.log(playerOneCollectedCards)
+    cleanSwap()
   }
-  if(playerTwoPlayableDeck === []) {
-    playerTwoPlayableDeck.push(playerTwoCollectedCards)
+  if(playerTwoPlayableDeck.length < 1) {
+    playerTwoPlayableDeck = playerTwoCollectedCards
+    console.log("hitting 2")
+    console.log(playerTwoPlayableDeck)
+    playerTwoCollectedCards = []
+    console.log(playerTwoCollectedCards)
+    cleanSwap()
   }
+}
+
+function cleanSwap() {
+  if(playerOnePlayableDeck.length > 0) {
+  plyOnePlayEl.classList.add("back-blue")
+  plyOnePlayEl.classList.add("shadow")
+  plyOneCollEl.classList.remove("back-blue")
+  plyOneCollEl.classList.add("outline")
+  }
+  if(playerTwoPlayableDeck.length > 0) {
+  plyTwoPlayEl.classList.add("back-blue")
+  plyTwoPlayEl.classList.add("shadow")
+  plyTwoCollEl.classList.remove("back-blue")
+  plyTwoCollEl.classList.add("outline")
+  }
+  
 }
 
 // function isWar() {
