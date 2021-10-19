@@ -14,6 +14,7 @@ plyOnePlayEl = document.querySelector("#player-one-playable")
 plyTwoPlayEl = document.querySelector("#player-two-playable")
 plyOneVsEl = document.querySelector("#player-one-vs-card")
 plyTwoVsEl = document.querySelector("#player-two-vs-card")
+displayMessage = document.querySelector("#message")
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -169,12 +170,21 @@ function cleanUpVs() {
     }, 1500)
 }
 
-function isWar() {
- let playerOneValue = parseInt(playerOneVsCard.slice(1))
+// function isWar() {
+//  let playerOneValue = parseInt(playerOneVsCard.slice(1))
 
- let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
+//  let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
 
- if(playerOneValue === playerTwoValue) {
-   
- }
+//  if(playerOneValue === playerTwoValue) {
+
+//  }
+// }
+
+function getWinner() {
+  if(playerOnePlayableDeck === [] && playerOneCollectedCards === []) {
+    displayMessage.textContent = "Congrats Player 2 You Won!!"
+  }
+  if(playerTwoPlayableDeck === [] && playerTwoCollectedCards === []) {
+    displayMessage.textContent = "Congrats Player 1 You Won!!"
+  }
 }
