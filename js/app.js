@@ -37,7 +37,7 @@ function splitDeck() {
   let half = Math.ceil(deck.length / 2)
 
   playerOnePlayableDeck = deck.slice(0, half)
-  
+
   playerTwoPlayableDeck = deck.slice(-half)
 }
 
@@ -139,18 +139,25 @@ function vsCard() {
 
 function cleanUpVs() {
     setTimeout(function() {
+      if(playerOneCollectedCards.length > 0){
 
       plyOneCollEl.classList.remove("outline")
       plyOneCollEl.classList.add("back-blue")
       plyOneCollEl.classList.add("shadow")
       plyOneVsEl.classList.remove(playerOneVsCard)
+      plyTwoVsEl.classList.remove(playerTwoVsCard)
       plyOneVsEl.classList.add("outline")
-
+      plyTwoVsEl.classList.add("outline")
+      }
+      if(playerTwoCollectedCards.length > 0) {
       plyTwoCollEl.classList.remove("outline")
       plyTwoCollEl.classList.add("back-blue")
       plyTwoCollEl.classList.add("shadow")
       plyTwoVsEl.classList.remove(playerTwoVsCard)
+      plyOneVsEl.classList.remove(playerOneVsCard)
+      plyOneVsEl.classList.add("outline")
       plyTwoVsEl.classList.add("outline")
+      }
 
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
