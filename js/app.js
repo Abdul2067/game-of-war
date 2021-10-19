@@ -129,10 +129,14 @@ function vsCard() {
  let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
 
   if(playerOneValue > playerTwoValue) {
+
     playerOneCollectedCards.push(playerOneVsCard, playerTwoVsCard)
+
   } else if(playerOneValue < playerTwoValue) {
+
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
-  } 
+
+  }
 
   cleanUpVs()
 }
@@ -150,6 +154,7 @@ function cleanUpVs() {
       plyTwoVsEl.classList.add("outline")
       }
       if(playerTwoCollectedCards.length > 0) {
+
       plyTwoCollEl.classList.remove("outline")
       plyTwoCollEl.classList.add("back-blue")
       plyTwoCollEl.classList.add("shadow")
@@ -162,4 +167,14 @@ function cleanUpVs() {
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
     }, 1500)
+}
+
+function isWar() {
+ let playerOneValue = parseInt(playerOneVsCard.slice(1))
+
+ let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
+
+ if(playerOneValue === playerTwoValue) {
+   
+ }
 }
