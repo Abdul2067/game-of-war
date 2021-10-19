@@ -16,9 +16,6 @@ plyTwoPlayEl = document.querySelector("#player-two-playable")
 plyOneVsEl = document.querySelector("#player-one-vs-card")
 plyTwoVsEl = document.querySelector("#player-two-vs-card")
 
-// console.log(plyOnePlayEl)
-// console.log(plyOneVsEl)
-// console.log(plyTwoVsEl)
 /*----------------------------- Event Listeners -----------------------------*/
 
 plyOnePlayEl.addEventListener("click", handleClick)
@@ -32,8 +29,6 @@ function init() {
   playerTwoPlayableDeck = []
   playerOneCollectedCards = []
   playerTwoCollectedCards = []
-  // playerOneVsCard = []
-  // playerTwoVsCard = []
   isWinner = null
 
   splitDeck() 
@@ -43,9 +38,6 @@ function splitDeck() {
   let half = Math.ceil(deck.length / 2)
   playerOnePlayableDeck = deck.slice(0, half)
   playerTwoPlayableDeck = deck.slice(-half)
-
-  // console.log(playerTwoPlayableDeck)
-  // console.log(playerOnePlayableDeck)
 }
 
 function checkValid() {
@@ -63,8 +55,6 @@ function handleClick() {
     playerOneVsCard = cardPicked[0]
     render(cardPicked)
     checkValid()
-    // vsCard()
-    // console.log(playerOneVsCard)
   }
 }
 
@@ -82,27 +72,24 @@ function render(cardPicked) {
   if (cardToRemove !== null) {
     
     plyOneVsEl.classList.remove(cardToRemove)
-    // console.log(cardToRemove)
   }
   cardToRemove = cardPicked
 
   plyOneVsEl.classList.add(cardPicked)
-  // console.log(plyOneVsEl)
 
 }
 
 function handleClickTwo() {
 
   if(playerTwoPlayableDeck.length > 0) {
-    // console.log(playerTwoPlayableDeck)
+
     let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
-    // console.log(randomIdx)
+
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
-    // console.log(cardPicked)
+
     playerTwoVsCard = cardPickedTwo[0]
     renderTwo(cardPickedTwo)
     checkValid()
-    // vsCard()
     
   }
 }
@@ -120,7 +107,6 @@ function renderTwo(cardPickedTwo) {
   }
   if (cardToRemoveTwo !== null) {
     plyTwoVsEl.classList.remove(cardToRemoveTwo)
-    // console.log(cardToRemoveTwo)
   }
   // if (playerTwoCollectedCards.length > 0){
   //   plyTwoCollEl.classList.remove("outline")
@@ -128,31 +114,17 @@ function renderTwo(cardPickedTwo) {
   cardToRemoveTwo = cardPickedTwo
 
   plyTwoVsEl.classList.add(cardPickedTwo)
-  // console.log(plyTwoVsEl)
 
 }
 
 
 function vsCard() {
   console.log("VS CARD", playerOneVsCard, playerTwoVsCard)
-  // console.log("PLAYER ONE VS CARD: ", playerOneVsCard)
-  // console.log("PLAYER ONE VS CARD AT 0: ", playerOneVsCard[0])
-  // console.log("PLAYER ONE VS CARD AT 0 AT 0: ", playerOneVsCard[0][0])
-  // console.log("PLAYER Two VS CARD: ", playerTwoVsCard)
-  // console.log("PLAYER Two VS CARD AT 0: ", playerTwoVsCard[0])
-  // console.log("PLAYER Two VS CARD AT 0 AT 0: ", playerTwoVsCard[0][0])
  let playerOneValue = parseInt(playerOneVsCard.slice(1))
  let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
-  console.log(parseInt(playerOneVsCard.slice(1)))
-  console.log(playerTwoValue)
   if(playerOneValue > playerTwoValue) {
     playerOneCollectedCards.push(playerOneVsCard, playerTwoVsCard)
-    console.log("PLAYER ONE WINS", playerOneCollectedCards)
   } else if(playerOneValue < playerTwoValue) {
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
-    console.log("PLAYER TWO WINS", playerTwoCollectedCards)
-
   } 
-  console.log(playerOneCollectedCards)
-  console.log(playerTwoCollectedCards)
 }
