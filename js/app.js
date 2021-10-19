@@ -35,12 +35,15 @@ function init() {
 
 function splitDeck() {
   let half = Math.ceil(deck.length / 2)
+
   playerOnePlayableDeck = deck.slice(0, half)
+  
   playerTwoPlayableDeck = deck.slice(-half)
 }
 
 function checkValid() {
   if(playerOneVsCard && playerTwoVsCard) {
+
     vsCard()
   }
 }
@@ -48,9 +51,13 @@ function checkValid() {
 
 function handleClick() {
   if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) {
+
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
+
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
+
     playerOneVsCard = cardPicked[0]
+
     render(cardPicked)
     checkValid()
   }
@@ -58,6 +65,7 @@ function handleClick() {
 
 function render(cardPicked) {
   let cardToRemove = null
+
   if (playerOnePlayableDeck.length === 0) {
     plyOnePlayEl.classList.remove("back-blue")
     plyOnePlayEl.classList.remove("shadow")
@@ -68,9 +76,9 @@ function render(cardPicked) {
 
   }
   if (cardToRemove !== null) {
-    
     plyOneVsEl.classList.remove(cardToRemove)
   }
+
   cardToRemove = cardPicked
 
   plyOneVsEl.classList.add(cardPicked)
@@ -94,6 +102,7 @@ function handleClickTwo() {
 
 function renderTwo(cardPickedTwo) {
   let cardToRemoveTwo = null
+
   if (playerTwoPlayableDeck.length === 0) {
     plyTwoPlayEl.classList.remove("back-blue")
     plyTwoPlayEl.classList.remove("shadow")
@@ -116,12 +125,15 @@ function renderTwo(cardPickedTwo) {
 
 function vsCard() {
  let playerOneValue = parseInt(playerOneVsCard.slice(1))
+
  let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
+
   if(playerOneValue > playerTwoValue) {
     playerOneCollectedCards.push(playerOneVsCard, playerTwoVsCard)
   } else if(playerOneValue < playerTwoValue) {
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
   } 
+
   cleanUpVs()
 }
 
@@ -130,15 +142,17 @@ function cleanUpVs() {
 
       plyOneCollEl.classList.remove("outline")
       plyOneCollEl.classList.add("back-blue")
+      plyOneCollEl.classList.add("shadow")
       plyOneVsEl.classList.remove(playerOneVsCard)
       plyOneVsEl.classList.add("outline")
 
       plyTwoCollEl.classList.remove("outline")
       plyTwoCollEl.classList.add("back-blue")
+      plyTwoCollEl.classList.add("shadow")
       plyTwoVsEl.classList.remove(playerTwoVsCard)
       plyTwoVsEl.classList.add("outline")
 
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
-    }, 2000)
+    }, 1500)
 }
