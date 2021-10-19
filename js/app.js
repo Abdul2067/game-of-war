@@ -170,6 +170,15 @@ function cleanUpVs() {
     }, 1500)
 }
 
+function collAndPlaySwap() {
+  if(playerOnePlayableDeck === []) {
+    playerOnePlayableDeck.push(playerOneCollectedCards)
+  }
+  if(playerTwoPlayableDeck === []) {
+    playerTwoPlayableDeck.push(playerTwoCollectedCards)
+  }
+}
+
 // function isWar() {
 //  let playerOneValue = parseInt(playerOneVsCard.slice(1))
 
@@ -180,11 +189,11 @@ function cleanUpVs() {
 //  }
 // }
 
-function getWinner() {
-  if(playerOnePlayableDeck === [] && playerOneCollectedCards === []) {
-    displayMessage.textContent = "Congrats Player 2 You Won!!"
-  }
-  if(playerTwoPlayableDeck === [] && playerTwoCollectedCards === []) {
-    displayMessage.textContent = "Congrats Player 1 You Won!!"
-  }
-}
+// function getWinner() {
+//   if(playerOnePlayableDeck === [] && playerOneCollectedCards === []) {
+//     displayMessage.textContent = "Congrats Player 2 You Won!!"
+//   }
+//   if(playerTwoPlayableDeck === [] && playerTwoCollectedCards === []) {
+//     displayMessage.textContent = "Congrats Player 1 You Won!!"
+//   }
+// }
