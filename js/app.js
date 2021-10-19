@@ -68,7 +68,7 @@ function render(cardPicked) {
   let cardToRemove = null
 
   if (playerOnePlayableDeck.length === 0) {
-    plyOnePlayEl.classList.remove("back-blue")
+    plyOnePlayEl.classList.remove("back-red")
     plyOnePlayEl.classList.remove("shadow")
     plyOnePlayEl.classList.add("outline")
   }
@@ -106,7 +106,7 @@ function renderTwo(cardPickedTwo) {
   let cardToRemoveTwo = null
 
   if (playerTwoPlayableDeck.length === 0) {
-    plyTwoPlayEl.classList.remove("back-blue")
+    plyTwoPlayEl.classList.remove("back-red")
     plyTwoPlayEl.classList.remove("shadow")
     plyTwoPlayEl.classList.add("outline")
   }
@@ -145,7 +145,7 @@ function cleanUpVs() {
     setTimeout(function() {
       if(playerOneCollectedCards.length > 0){
         plyOneCollEl.classList.remove("outline")
-        plyOneCollEl.classList.add("back-blue")
+        plyOneCollEl.classList.add("back-red")
         plyOneCollEl.classList.add("shadow")
         plyOneVsEl.classList.remove(playerOneVsCard)
         plyTwoVsEl.classList.remove(playerTwoVsCard)
@@ -154,7 +154,7 @@ function cleanUpVs() {
       }
       if(playerTwoCollectedCards.length > 0) {
         plyTwoCollEl.classList.remove("outline")
-        plyTwoCollEl.classList.add("back-blue")
+        plyTwoCollEl.classList.add("back-red")
         plyTwoCollEl.classList.add("shadow")
         plyTwoVsEl.classList.remove(playerTwoVsCard)
         plyOneVsEl.classList.remove(playerOneVsCard)
@@ -185,18 +185,18 @@ function collAndPlaySwap() {
 
 function cleanSwap() {
   if(playerOnePlayableDeck.length > 0) {
-    plyOnePlayEl.classList.add("back-blue")
+    plyOnePlayEl.classList.add("back-red")
     plyOnePlayEl.classList.add("shadow")
     plyOnePlayEl.classList.remove("outline")
-    plyOneCollEl.classList.remove("back-blue")
+    plyOneCollEl.classList.remove("back-red")
     plyOneCollEl.classList.add("outline")
     plyTwoCollEl.classList.remove("shadow")
   }
   if(playerTwoPlayableDeck.length > 0) {
-    plyTwoPlayEl.classList.add("back-blue")
+    plyTwoPlayEl.classList.add("back-red")
     plyTwoPlayEl.classList.add("shadow")
     plyTwoPlayEl.classList.remove("outline")
-    plyTwoCollEl.classList.remove("back-blue")
+    plyTwoCollEl.classList.remove("back-red")
     plyTwoCollEl.classList.add("outline")
     plyTwoCollEl.classList.remove("shadow")
   }
