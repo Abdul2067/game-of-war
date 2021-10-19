@@ -54,7 +54,7 @@ function handleClick() {
   if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) {
 
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
-    console.log(playerOnePlayableDeck)
+    
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
 
     playerOneVsCard = cardPicked[0]
@@ -66,7 +66,6 @@ function handleClick() {
 
 function render(cardPicked) {
   let cardToRemove = null
-  console.log(cardPicked)
 
   if (playerOnePlayableDeck.length === 0) {
     plyOnePlayEl.classList.remove("back-blue")
@@ -92,7 +91,7 @@ function handleClickTwo() {
   if(playerTwoPlayableDeck.length > 0 && playerTwoVsCard === undefined) {
 
     let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
-    console.log(playerTwoPlayableDeck)
+
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
 
     playerTwoVsCard = cardPickedTwo[0]
@@ -105,7 +104,6 @@ function handleClickTwo() {
 
 function renderTwo(cardPickedTwo) {
   let cardToRemoveTwo = null
-  console.log(cardPickedTwo)
 
   if (playerTwoPlayableDeck.length === 0) {
     plyTwoPlayEl.classList.remove("back-blue")
@@ -128,22 +126,19 @@ function renderTwo(cardPickedTwo) {
 
 
 function vsCard() {
- let playerOneValue = parseInt(playerOneVsCard.slice(1))
+  let playerOneValue = parseInt(playerOneVsCard.slice(1))
 
- let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
+  let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
 
   if(playerOneValue > playerTwoValue) {
-
     playerOneCollectedCards.push(playerOneVsCard, playerTwoVsCard)
 
   } else if(playerOneValue < playerTwoValue) {
-
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
 
   }
   
   cleanUpVs()
-  // collAndPlaySwap()
 }
 
 function cleanUpVs() {
@@ -175,37 +170,35 @@ function cleanUpVs() {
 }
 
 function collAndPlaySwap() {
-  console.log("this function is running")
+
   if(playerOnePlayableDeck.length < 1) {
     playerOnePlayableDeck = playerOneCollectedCards
-    console.log("hitting 1")
-    console.log(playerOnePlayableDeck)
     playerOneCollectedCards = []
-    console.log(playerOneCollectedCards)
     cleanSwap()
   }
   if(playerTwoPlayableDeck.length < 1) {
     playerTwoPlayableDeck = playerTwoCollectedCards
-    console.log("hitting 2")
-    console.log(playerTwoPlayableDeck)
     playerTwoCollectedCards = []
-    console.log(playerTwoCollectedCards)
     cleanSwap()
   }
 }
 
 function cleanSwap() {
   if(playerOnePlayableDeck.length > 0) {
-  plyOnePlayEl.classList.add("back-blue")
-  plyOnePlayEl.classList.add("shadow")
-  plyOneCollEl.classList.remove("back-blue")
-  plyOneCollEl.classList.add("outline")
+    plyOnePlayEl.classList.add("back-blue")
+    plyOnePlayEl.classList.add("shadow")
+    plyOnePlayEl.classList.remove("outline")
+    plyOneCollEl.classList.remove("back-blue")
+    plyOneCollEl.classList.add("outline")
+    plyTwoCollEl.classList.remove("shadow")
   }
   if(playerTwoPlayableDeck.length > 0) {
-  plyTwoPlayEl.classList.add("back-blue")
-  plyTwoPlayEl.classList.add("shadow")
-  plyTwoCollEl.classList.remove("back-blue")
-  plyTwoCollEl.classList.add("outline")
+    plyTwoPlayEl.classList.add("back-blue")
+    plyTwoPlayEl.classList.add("shadow")
+    plyTwoPlayEl.classList.remove("outline")
+    plyTwoCollEl.classList.remove("back-blue")
+    plyTwoCollEl.classList.add("outline")
+    plyTwoCollEl.classList.remove("shadow")
   }
   
 }
