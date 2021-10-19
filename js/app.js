@@ -32,11 +32,11 @@ function init() {
   playerTwoPlayableDeck = []
   playerOneCollectedCards = []
   playerTwoCollectedCards = []
-  playerOneVsCard = []
-  playerTwoVsCard = []
+  // playerOneVsCard = []
+  // playerTwoVsCard = []
   isWinner = null
 
-  splitDeck()
+  splitDeck() 
 }
 
 function splitDeck() {
@@ -48,32 +48,38 @@ function splitDeck() {
   // console.log(playerOnePlayableDeck)
 }
 
+function checkValid() {
+  if(playerOneVsCard && playerTwoVsCard) {
+    console.log("VALID")
+    vsCard()
+  }
+}
+
 
 function handleClick() {
-  // console.log(plyOnePlayEl)
-  // console.log(playerOnePlayableDeck)
-  // console.log(plyTwoPlayEl)
   if(playerOnePlayableDeck.length > 0) {
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
-    playerOneVsCard.push(cardPicked)
+    playerOneVsCard = cardPicked[0]
     render(cardPicked)
-    vsCard()
+    checkValid()
+    // vsCard()
     // console.log(playerOneVsCard)
   }
 }
 
 function render(cardPicked) {
+  let cardToRemove = null
   if (playerOnePlayableDeck.length === 0) {
     plyOnePlayEl.classList.remove("back-blue")
     plyOnePlayEl.classList.remove("shadow")
     plyOnePlayEl.classList.add("outline")
   }
-  if (playerOneVsCard.length === 1) {
+  if (playerOneVsCard) {
     plyOneVsEl.classList.remove("outline")
 
   }
-  if (playerOneVsCard.length > 1) {
+  if (cardToRemove !== null) {
     
     plyOneVsEl.classList.remove(cardToRemove)
     // console.log(cardToRemove)
@@ -89,32 +95,36 @@ function handleClickTwo() {
 
   if(playerTwoPlayableDeck.length > 0) {
     // console.log(playerTwoPlayableDeck)
-    let randomIdxTwo = Math.ceil(Math.random()*playerTwoPlayableDeck.length)
+    let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
     // console.log(randomIdx)
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
     // console.log(cardPicked)
-    playerTwoVsCard.push(cardPickedTwo)
-
+    playerTwoVsCard = cardPickedTwo[0]
     renderTwo(cardPickedTwo)
-    vsCard()
+    checkValid()
+    // vsCard()
     
   }
 }
 
 function renderTwo(cardPickedTwo) {
+  let cardToRemoveTwo = null
   if (playerTwoPlayableDeck.length === 0) {
     plyTwoPlayEl.classList.remove("back-blue")
     plyTwoPlayEl.classList.remove("shadow")
     plyTwoPlayEl.classList.add("outline")
   }
-  if (playerTwoVsCard.length === 1) {
+  if (playerTwoVsCard) {
     plyTwoVsEl.classList.remove("outline")
 
   }
-  if (playerTwoVsCard.length > 1) {
+  if (cardToRemoveTwo !== null) {
     plyTwoVsEl.classList.remove(cardToRemoveTwo)
     // console.log(cardToRemoveTwo)
   }
+  // if (playerTwoCollectedCards.length > 0){
+  //   plyTwoCollEl.classList.remove("outline")
+  // }
   cardToRemoveTwo = cardPickedTwo
 
   plyTwoVsEl.classList.add(cardPickedTwo)
@@ -124,18 +134,25 @@ function renderTwo(cardPickedTwo) {
 
 
 function vsCard() {
-  console.log("PLAYER ONE VS CARD: ", playerOneVsCard)
-  console.log("PLAYER ONE VS CARD AT 0: ", playerOneVsCard[0])
-  console.log("PLAYER ONE VS CARD AT 0 AT 0: ", playerOneVsCard[0][0])
-  console.log("PLAYER Two VS CARD: ", playerTwoVsCard)
-  console.log("PLAYER Two VS CARD AT 0: ", playerTwoVsCard[0])
-  console.log("PLAYER Two VS CARD AT 0 AT 0: ", playerTwoVsCard[0][0])
- let playerOneValue = parseInt(playerOneVsCard[0][0].slice(1))
- let playerTwoValue = parseInt(playerTwoVsCard[0][0].slice(1))
-  console.log(playerOneValue)
+  console.log("VS CARD", playerOneVsCard, playerTwoVsCard)
+  // console.log("PLAYER ONE VS CARD: ", playerOneVsCard)
+  // console.log("PLAYER ONE VS CARD AT 0: ", playerOneVsCard[0])
+  // console.log("PLAYER ONE VS CARD AT 0 AT 0: ", playerOneVsCard[0][0])
+  // console.log("PLAYER Two VS CARD: ", playerTwoVsCard)
+  // console.log("PLAYER Two VS CARD AT 0: ", playerTwoVsCard[0])
+  // console.log("PLAYER Two VS CARD AT 0 AT 0: ", playerTwoVsCard[0][0])
+ let playerOneValue = parseInt(playerOneVsCard.slice(1))
+ let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
+  console.log(parseInt(playerOneVsCard.slice(1)))
   console.log(playerTwoValue)
-  // playerOneVsCard.splice(0, 1)
-  // playerOne = playerOneVsCard
-//   parseInt(playerOneVsCard)
-// console.log(parseInt(playerOneVsCard))
+  if(playerOneValue > playerTwoValue) {
+    playerOneCollectedCards.push(playerOneVsCard, playerTwoVsCard)
+    console.log("PLAYER ONE WINS", playerOneCollectedCards)
+  } else if(playerOneValue < playerTwoValue) {
+    playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
+    console.log("PLAYER TWO WINS", playerTwoCollectedCards)
+
+  } 
+  console.log(playerOneCollectedCards)
+  console.log(playerTwoCollectedCards)
 }
