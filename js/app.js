@@ -37,9 +37,9 @@ function init() {
 function splitDeck() {
   let half = Math.ceil(deck.length / 2)
 
-  playerOnePlayableDeck = deck.slice(0, half)
+    playerOnePlayableDeck = deck.slice(0, half)
 
-  playerTwoPlayableDeck = deck.slice(-half)
+    playerTwoPlayableDeck = deck.slice(-half)
 }
 
 function checkValid() {
@@ -51,8 +51,9 @@ function checkValid() {
 
 
 function handleClick() {
-  if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) {
-
+  if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) 
+  
+  {
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
 
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
@@ -83,13 +84,13 @@ function render(cardPicked) {
   cardToRemove = cardPicked
 
   plyOneVsEl.classList.add(cardPicked)
-
 }
 
 function handleClickTwo() {
 
-  if(playerTwoPlayableDeck.length > 0 && playerTwoVsCard === undefined) {
-
+  if(playerTwoPlayableDeck.length > 0 && playerTwoVsCard === undefined) 
+  
+  {
     let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
 
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
@@ -97,8 +98,7 @@ function handleClickTwo() {
     playerTwoVsCard = cardPickedTwo[0]
 
     renderTwo(cardPickedTwo)
-    checkValid()
-    
+    checkValid() 
   }
 }
 
@@ -112,16 +112,13 @@ function renderTwo(cardPickedTwo) {
   }
   if (playerTwoVsCard) {
     plyTwoVsEl.classList.remove("outline")
-
   }
   if (cardToRemoveTwo !== null) {
     plyTwoVsEl.classList.remove(cardToRemoveTwo)
   }
-
   cardToRemoveTwo = cardPickedTwo
 
   plyTwoVsEl.classList.add(cardPickedTwo)
-
 }
 
 
@@ -136,8 +133,9 @@ function vsCard() {
   } else if(playerOneValue < playerTwoValue) {
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
 
-  }
-  
+   } //else {
+  //   isWar()
+  // }
   cleanUpVs()
 }
 
@@ -163,10 +161,9 @@ function cleanUpVs() {
       }
       collAndPlaySwap()
 
-
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
-    }, 500)
+    }, 100)
 }
 
 function collAndPlaySwap() {
@@ -203,15 +200,9 @@ function cleanSwap() {
   
 }
 
-function isWar() {
- let playerOneValue = parseInt(playerOneVsCard.slice(1))
+// function isWar() {
 
- let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
-
- if(playerOneValue === playerTwoValue) {
-
- }
-}
+// }
 
 // function getWinner() {
 //   if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards === []) {
