@@ -54,7 +54,7 @@ function handleClick() {
   if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) {
 
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
-    
+
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
 
     playerOneVsCard = cardPicked[0]
@@ -203,21 +203,21 @@ function cleanSwap() {
   
 }
 
-// function isWar() {
-//  let playerOneValue = parseInt(playerOneVsCard.slice(1))
+function isWar() {
+ let playerOneValue = parseInt(playerOneVsCard.slice(1))
 
-//  let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
+ let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
 
-//  if(playerOneValue === playerTwoValue) {
+ if(playerOneValue === playerTwoValue) {
 
-//  }
-// }
+ }
+}
 
 // function getWinner() {
-//   if(playerOnePlayableDeck === [] && playerOneCollectedCards === []) {
+//   if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards === []) {
 //     displayMessage.textContent = "Congrats Player 2 You Won!!"
 //   }
-//   if(playerTwoPlayableDeck === [] && playerTwoCollectedCards === []) {
+//   if(playerTwoPlayableDeck === 0 && playerTwoCollectedCards === []) {
 //     displayMessage.textContent = "Congrats Player 1 You Won!!"
 //   }
 // }

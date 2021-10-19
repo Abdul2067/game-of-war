@@ -1,4 +1,17 @@
+body {
+  background-color: skyblue;
+  text-align: center
+}
 
+h1 {
+  color: goldenrod;
+  font-size: 38px;
+  text-shadow: black 5px 3px;
+}
+
+h2 {
+  color: red;
+}
 
 
 
