@@ -7,6 +7,7 @@ h1 {
   color: gold;
   font-size: 38px;
   text-shadow: 4px 4px 4px black;
+  margin-top: 10px;
 }
 
 h2 {
@@ -18,6 +19,10 @@ p {
   color: whitesmoke;
 }
 
+#img-two {
+  margin-top: px;
+}
+
 #player-one-name {
   margin-bottom: 30px;
 }
@@ -25,7 +30,15 @@ p {
 #player-two-name {
   margin-bottom: 15px;
 }
-
+.btn {
+  border: none;
+  color: black;
+  background-color: purple;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 8px;
+  font-family: var(--serif);
+}
 
 
 

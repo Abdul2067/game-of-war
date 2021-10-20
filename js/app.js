@@ -133,9 +133,9 @@ function vsCard() {
   } else if(playerOneValue < playerTwoValue) {
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
 
-   } //else {
-  //   isWar()
-  // }
+   } else if (playerOneValue === playerTwoValue) {
+    isWar()
+  }
   cleanUpVs()
 }
 
@@ -144,7 +144,7 @@ function cleanUpVs() {
       if(playerOneCollectedCards.length > 0){
         plyOneCollEl.classList.remove("outline")
         plyOneCollEl.classList.add("back-red")
-        plyOneCollEl.classList.add("shadow")
+        // plyOneCollEl.classList.add("shadow")
         plyOneVsEl.classList.remove(playerOneVsCard)
         plyTwoVsEl.classList.remove(playerTwoVsCard)
         plyOneVsEl.classList.add("outline")
@@ -153,7 +153,7 @@ function cleanUpVs() {
       if(playerTwoCollectedCards.length > 0) {
         plyTwoCollEl.classList.remove("outline")
         plyTwoCollEl.classList.add("back-red")
-        plyTwoCollEl.classList.add("shadow")
+        // plyTwoCollEl.classList.add("shadow")
         plyTwoVsEl.classList.remove(playerTwoVsCard)
         plyOneVsEl.classList.remove(playerOneVsCard)
         plyOneVsEl.classList.add("outline")
@@ -163,7 +163,7 @@ function cleanUpVs() {
 
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
-    }, 1500)
+    }, 500)
 }
 
 function collAndPlaySwap() {
@@ -200,9 +200,17 @@ function cleanSwap() {
   
 }
 
-// function isWar() {
+function isWar() {
+  let oneVsCard = playerOnePlayableDeck.splice(0, 4)
+  let twoVsCard = playerTwoPlayableDeck.splice(0, 4)
+  oneVsCard.push(playerOneVsCard)
+  twoVsCard.push(playerTwoVsCard)
+  playerOneVsCard = oneVsCard
+  playerTwoVsCard = twoVsCard
+  console.log(playerOneVsCard)
+  console.log(playerTwoVsCard)
 
-// }
+}
 
 // function getWinner() {
 //   if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards === []) {
