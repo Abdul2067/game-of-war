@@ -163,7 +163,7 @@ function cleanUpVs() {
 
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
-    }, 100)
+    }, 1500)
 }
 
 function collAndPlaySwap() {
