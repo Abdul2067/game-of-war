@@ -35,12 +35,19 @@ function init() {
 }
 
 function splitDeck() {
-  let half = Math.ceil(deck.length / 2)
 
-    playerOnePlayableDeck = deck.slice(0, half)
+  let random = deck.sort(() => 0.5 - Math.random())
 
-    playerTwoPlayableDeck = deck.slice(-half)
-}
+  let half = Math.ceil(random.length / 2)
+
+    playerOnePlayableDeck = random.slice(0, half)
+    
+    playerTwoPlayableDeck = random.slice(-half)
+    
+
+    // console.log(playerOnePlayableDeck)
+    // console.log(playerTwoPlayableDeck)
+  }
 
 function checkValid() {
   if(playerOneVsCard && playerTwoVsCard) {
@@ -203,13 +210,32 @@ function cleanSwap() {
 function isWar() {
   let oneVsCard = playerOnePlayableDeck.splice(0, 4)
   let twoVsCard = playerTwoPlayableDeck.splice(0, 4)
-  oneVsCard.push(playerOneVsCard)
-  twoVsCard.push(playerTwoVsCard)
+
+  oneVsCard.unshift(playerOneVsCard)
+  twoVsCard.unshift(playerTwoVsCard)
+  console.log(oneVsCard)
+  console.log(twoVsCard)
+
   playerOneVsCard = oneVsCard
   playerTwoVsCard = twoVsCard
   console.log(playerOneVsCard)
   console.log(playerTwoVsCard)
 
+  let playerOneValue = parseInt(playerOneVsCard[4].slice(1))
+  let playerTwoValue = parseInt(playerTwoVsCard[4].slice(1))
+  console.log(playerOneValue)
+  console.log(playerTwoValue)
+
+  if(playerOneValue > playerTwoValue) {
+    playerOneCollectedCards.push(...playerOneVsCard, ...playerTwoVsCard)
+    console.log(playerOneCollectedCards)
+
+  } else if(playerOneValue < playerTwoValue) {
+    playerTwoCollectedCards.push(...playerOneVsCard, ...playerTwoVsCard)
+    console.log(playerTwoCollectedCards)
+
+   }
+   cleanUpVs()
 }
 
 // function getWinner() {
