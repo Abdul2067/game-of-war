@@ -17,12 +17,14 @@ plyTwoVsEl = document.querySelector("#player-two-vs-card")
 displayMessage = document.querySelector("#message")
 lightDarkBtn = document.querySelector("#light-dark-button")
 body = document.querySelector("body")
+leo = document.querySelector("#img-one")
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 plyOnePlayEl.addEventListener("click", handleClick)
 plyTwoPlayEl.addEventListener("click", handleClickTwo)
 lightDarkBtn.addEventListener("click", toggleLightDark)
+leo.addEventListener("click", rapidSolve)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -61,7 +63,7 @@ function checkValid() {
 
 
 function handleClick() {
-  if(playerOnePlayableDeck.length > 0 && playerOneVsCard === undefined) 
+  if(playerOnePlayableDeck.length > 0 && !isWinner && playerOneVsCard === undefined) 
   
   {
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
@@ -72,6 +74,7 @@ function handleClick() {
 
     render(cardPicked)
     checkValid()
+    getWinner()
   }
 }
 
@@ -98,7 +101,7 @@ function render(cardPicked) {
 
 function handleClickTwo() {
   
-  if(playerTwoPlayableDeck.length > 0 && playerTwoVsCard === undefined) 
+  if(playerTwoPlayableDeck.length > 0 && !isWinner && playerTwoVsCard === undefined) 
   
   {
     let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
@@ -109,6 +112,7 @@ function handleClickTwo() {
     
     renderTwo(cardPickedTwo)
     checkValid() 
+    getWinner()
   }
 }
 
@@ -144,7 +148,13 @@ function vsCard() {
     playerTwoCollectedCards.push(playerOneVsCard, playerTwoVsCard)
 
    } else if (playerOneValue === playerTwoValue) {
-    isWar()
+     if(playerOnePlayableDeck.length + playerOneCollectedCards.length < 5) {
+       playerTwoPlayableDeck.push(...playerOnePlayableDeck, ...playerOneCollectedCards)
+     } else if(playerTwoPlayableDeck.length + playerTwoCollectedCards.length < 5) {
+       playerOnePlayableDeck.push(...playerTwoPlayableDeck, ...playerTwoCollectedCards)
+      } else {
+        isWar()   
+      }
   }
   cleanUpVs()
 }
@@ -154,7 +164,6 @@ function cleanUpVs() {
       if(playerOneCollectedCards.length > 0){
         plyOneCollEl.classList.remove("outline")
         plyOneCollEl.classList.add("back-red")
-        // plyOneCollEl.classList.add("shadow")
         plyOneVsEl.classList.remove(playerOneVsCard)
         plyTwoVsEl.classList.remove(playerTwoVsCard)
         plyOneVsEl.classList.add("outline")
@@ -163,11 +172,18 @@ function cleanUpVs() {
       if(playerTwoCollectedCards.length > 0) {
         plyTwoCollEl.classList.remove("outline")
         plyTwoCollEl.classList.add("back-red")
-        // plyTwoCollEl.classList.add("shadow")
         plyTwoVsEl.classList.remove(playerTwoVsCard)
         plyOneVsEl.classList.remove(playerOneVsCard)
         plyOneVsEl.classList.add("outline")
         plyTwoVsEl.classList.add("outline")
+      }
+      if(Array.isArray(playerOneVsCard)){
+        for (let i = 0; i < playerOneVsCard.length; i++) {
+          plyOneVsEl.classList.remove(playerOneVsCard[i])
+        } 
+        for (let i = 0; i < playerTwoVsCard.length; i++) {
+          plyTwoVsEl.classList.remove(playerTwoVsCard[i])
+        }
       }
       collAndPlaySwap()
 
@@ -183,23 +199,31 @@ function collAndPlaySwap() {
     playerOneCollectedCards = []
     cleanSwap()
   }
+
   if(playerTwoPlayableDeck.length < 1) {
     playerTwoPlayableDeck = playerTwoCollectedCards
     playerTwoCollectedCards = []
     cleanSwap()
   }
+  console.log("--------------")
+  console.log(playerOnePlayableDeck)
+  console.log(playerOneCollectedCards)
+  console.log("--------------")
+  console.log(playerTwoPlayableDeck)
+  console.log(playerTwoCollectedCards)
+  console.log(playerOnePlayableDeck.length + playerOneCollectedCards.length + playerTwoCollectedCards.length + playerTwoPlayableDeck.length )
 }
 
 function cleanSwap() {
-  if(playerOnePlayableDeck.length > 0) {
+  if(playerOneCollectedCards.length === 0) {
     plyOnePlayEl.classList.add("back-red")
     plyOnePlayEl.classList.add("shadow")
     plyOnePlayEl.classList.remove("outline")
     plyOneCollEl.classList.remove("back-red")
     plyOneCollEl.classList.add("outline")
-    plyTwoCollEl.classList.remove("shadow")
+    plyOneCollEl.classList.remove("shadow")
   }
-  if(playerTwoPlayableDeck.length > 0) {
+  if(playerTwoCollectedCards.length === 0) {
     plyTwoPlayEl.classList.add("back-red")
     plyTwoPlayEl.classList.add("shadow")
     plyTwoPlayEl.classList.remove("outline")
@@ -210,63 +234,71 @@ function cleanSwap() {
   
 }
 
-// function renderIsWar() {
-//   let cardToRemoveTwo = null
-
-//   if (playerTwoVsCard) {
-//     plyTwoVsEl.classList.remove("outline")
-//   }
-//   if (cardToRemoveTwo !== null) {
-//     plyTwoVsEl.classList.remove(cardToRemoveTwo)
-//   }
-//   cardToRemoveTwo = cardPickedTwo
-
-//   plyTwoVsEl.classList.add(cardPickedTwo[4])
-// }
-
 function isWar() {
+  if(playerOnePlayableDeck.length < 4 || playerTwoPlayableDeck.length < 4) {
+    warDeckSwap()
+  }
   let oneVsCard = playerOnePlayableDeck.splice(0, 4)
   let twoVsCard = playerTwoPlayableDeck.splice(0, 4)
 
   oneVsCard.unshift(playerOneVsCard)
   twoVsCard.unshift(playerTwoVsCard)
-  console.log(oneVsCard)
-  console.log(twoVsCard)
 
   playerOneVsCard = oneVsCard
   playerTwoVsCard = twoVsCard
-  console.log(playerOneVsCard)
-  console.log(playerTwoVsCard)
+
+  setTimeout(function() {
+  playerOneVsCard = oneVsCard
+  playerTwoVsCard = twoVsCard
+ 
+
+    plyOneVsEl.classList.remove("outline")
+    plyTwoVsEl.classList.remove("outline")
+    plyOneVsEl.classList.add(playerOneVsCard[4])
+    plyTwoVsEl.classList.add(playerTwoVsCard[4])
+    cleanUpVs()
+  }, 1000)
 
   let playerOneValue = parseInt(playerOneVsCard[4].slice(1))
   let playerTwoValue = parseInt(playerTwoVsCard[4].slice(1))
-  console.log(playerOneValue)
-  console.log(playerTwoValue)
 
   if(playerOneValue > playerTwoValue) {
     playerOneCollectedCards.push(...playerOneVsCard, ...playerTwoVsCard)
-    console.log(playerOneCollectedCards)
 
   } else if(playerOneValue < playerTwoValue) {
     playerTwoCollectedCards.push(...playerOneVsCard, ...playerTwoVsCard)
-    console.log(playerTwoCollectedCards)
 
+   } else if (playerOneValue === playerTwoValue) {
+     playerOneCollectedCards.push(...playerOneVsCard, ...playerTwoVsCard)
    }
    cleanUpVs()
 }
 
-// function cleanUpIsWar() {
+function warDeckSwap() {
+  if(playerOnePlayableDeck.length < 4) {
+    playerOnePlayableDeck.push(...playerOneCollectedCards)
+    // console.log(playerOnePlayableDeck)
+    playerOneCollectedCards = []
+    cleanSwap()
+  }
+  if(playerTwoPlayableDeck.length < 4) {
+    playerTwoPlayableDeck.push(...playerTwoCollectedCards)
+    // console.log(playerTwoPlayableDeck)
+    playerTwoCollectedCards = []
+    cleanSwap()
+  }
+}
 
-// }
-
-// function getWinner() {
-//   if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards === 0) {
-//     displayMessage.textContent = "Congrats Player 2 You Won!!"
-//   }
-//   if(playerTwoPlayableDeck === 0 && playerTwoCollectedCards === 0) {
-//     displayMessage.textContent = "Congrats Player 1 You Won!!"
-//   }
-// }
+function getWinner() {
+  if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards.length === 0) {
+    isWinner = true
+    displayMessage.textContent = "Congrats Player 2 You Won!!"
+  }
+  if(playerTwoPlayableDeck.length === 0 && playerTwoCollectedCards.length === 0) {
+    isWinner = true
+    displayMessage.textContent = "Congrats Player 1 You Won!!"
+  }
+}
 
  function toggleLightDark() {
    body.className = body.className === "light" ? "" : "light"
@@ -282,3 +314,14 @@ function checkDarkPref() {
 }
 
 checkDarkPref()
+
+function rapidSolve() {
+  let timerInterval = setInterval(function(){
+    if(!isWinner) {
+    handleClick()
+    handleClickTwo()
+    } else {
+    clearInterval(timerInterval)
+    }
+  }, 100)
+}

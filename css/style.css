@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: rgb(0, 0, 128);
   text-align: center
 }
@@ -12,6 +16,7 @@ h1 {
 
 h2 {
   color: red;
+  font-style: italic;
 }
 
 p {
@@ -20,11 +25,13 @@ p {
 }
 
 .btn {
-  border: none;
+  box-shadow: 0 2px 10px rgba(252, 252, 252, 0.4);
+  border-radius: 8px;
+  border-color: black;
   color: black;
   background-color: rgb(148, 3, 148);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 15px;
   padding: 8px;
   font-family: var(--serif);
 }
@@ -34,7 +41,7 @@ p {
 }
 
 body.light {
-  background-color: burlywood;
+  background-color: skyblue;
 
 }
 
@@ -47,16 +54,24 @@ body.light {
   font-family: var(--serif);
 } */
 
+#img-one {
+  margin-bottom: 10px;
+}
+
 #img-two {
-  margin-top: px;
+  margin-bottom: 10px;
 }
 
 #player-one-name {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 #player-two-name {
   margin-bottom: 15px;
+}
+
+#bottom-cards {
+  margin-bottom: 0px;
 }
 
 

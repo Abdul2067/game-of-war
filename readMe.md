@@ -1,6 +1,8 @@
-Game of War
+# Game of War
 
 Growing up as a kid I loved playing WAR with anyone and everyone, it was simple and easy to play so it's only right I recreated it. The objective of WAR is to be the last person standing or in other words hold 52 cards of the deck.
+
+<img src="">
 
 Click on the link below to play WAR now!!
 https://game-of-war.netlify.app/
