@@ -19,6 +19,34 @@ p {
   color: whitesmoke;
 }
 
+.btn {
+  border: none;
+  color: black;
+  background-color: rgb(148, 3, 148);
+  font-weight: 600;
+  font-size: 18px;
+  padding: 8px;
+  font-family: var(--serif);
+}
+
+:root {
+  font-size: 100%;
+}
+
+body.light {
+  background-color: burlywood;
+
+}
+
+/* #light-dark-button.light {
+  background-color: skyblue;  border: none;
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 8px;
+  font-family: var(--serif);
+} */
+
 #img-two {
   margin-top: px;
 }
@@ -30,15 +58,7 @@ p {
 #player-two-name {
   margin-bottom: 15px;
 }
-.btn {
-  border: none;
-  color: black;
-  background-color: purple;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 8px;
-  font-family: var(--serif);
-}
+
 
 
 

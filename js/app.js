@@ -15,11 +15,14 @@ plyTwoPlayEl = document.querySelector("#player-two-playable")
 plyOneVsEl = document.querySelector("#player-one-vs-card")
 plyTwoVsEl = document.querySelector("#player-two-vs-card")
 displayMessage = document.querySelector("#message")
+lightDarkBtn = document.querySelector("#light-dark-button")
+body = document.querySelector("body")
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 plyOnePlayEl.addEventListener("click", handleClick)
 plyTwoPlayEl.addEventListener("click", handleClickTwo)
+lightDarkBtn.addEventListener("click", toggleLightDark)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -264,3 +267,18 @@ function isWar() {
 //     displayMessage.textContent = "Congrats Player 1 You Won!!"
 //   }
 // }
+
+ function toggleLightDark() {
+   body.className = body.className === "light" ? "" : "light"
+ }
+
+function checkDarkPref() {
+  if(
+    window.matchMedia("(perfers-color-scheme:dark)").matches && 
+    body.className !== "dark"
+    ){
+      toggleLightDark()
+    }
+}
+
+checkDarkPref()
