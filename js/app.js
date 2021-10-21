@@ -74,7 +74,7 @@ function handleClick() {
 
 function render(cardPicked) {
   let cardToRemove = null
-
+  
   if (playerOnePlayableDeck.length === 0) {
     plyOnePlayEl.classList.remove("back-red")
     plyOnePlayEl.classList.remove("shadow")
@@ -82,28 +82,28 @@ function render(cardPicked) {
   }
   if (playerOneVsCard) {
     plyOneVsEl.classList.remove("outline")
-
+    
   }
   if (cardToRemove !== null) {
     plyOneVsEl.classList.remove(cardToRemove)
   }
-
+  
   cardToRemove = cardPicked
-
+  
   plyOneVsEl.classList.add(cardPicked)
 }
 
 function handleClickTwo() {
-
+  
   if(playerTwoPlayableDeck.length > 0 && playerTwoVsCard === undefined) 
   
   {
     let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
-
+    
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
-
+    
     playerTwoVsCard = cardPickedTwo[0]
-
+    
     renderTwo(cardPickedTwo)
     checkValid() 
   }
@@ -207,6 +207,20 @@ function cleanSwap() {
   
 }
 
+// function renderIsWar() {
+//   let cardToRemoveTwo = null
+
+//   if (playerTwoVsCard) {
+//     plyTwoVsEl.classList.remove("outline")
+//   }
+//   if (cardToRemoveTwo !== null) {
+//     plyTwoVsEl.classList.remove(cardToRemoveTwo)
+//   }
+//   cardToRemoveTwo = cardPickedTwo
+
+//   plyTwoVsEl.classList.add(cardPickedTwo[4])
+// }
+
 function isWar() {
   let oneVsCard = playerOnePlayableDeck.splice(0, 4)
   let twoVsCard = playerTwoPlayableDeck.splice(0, 4)
@@ -238,11 +252,15 @@ function isWar() {
    cleanUpVs()
 }
 
+// function cleanUpIsWar() {
+
+// }
+
 // function getWinner() {
-//   if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards === []) {
+//   if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards === 0) {
 //     displayMessage.textContent = "Congrats Player 2 You Won!!"
 //   }
-//   if(playerTwoPlayableDeck === 0 && playerTwoCollectedCards === []) {
+//   if(playerTwoPlayableDeck === 0 && playerTwoCollectedCards === 0) {
 //     displayMessage.textContent = "Congrats Player 1 You Won!!"
 //   }
 // }
