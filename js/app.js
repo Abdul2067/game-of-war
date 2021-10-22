@@ -176,7 +176,6 @@ function cleanUpVs() {
         }
       }
       collAndPlaySwap()
-
       playerOneVsCard = undefined
       playerTwoVsCard = undefined
     }, 500)
@@ -184,13 +183,13 @@ function cleanUpVs() {
 
 function collAndPlaySwap() {
 
-  if(playerOnePlayableDeck.length < 1) {
+  if(playerOnePlayableDeck.length < 1 && isWinner === null) {
     playerOnePlayableDeck = playerOneCollectedCards
     playerOneCollectedCards = []
     cleanSwap()
   }
 
-  if(playerTwoPlayableDeck.length < 1) {
+  if(playerTwoPlayableDeck.length < 1 && isWinner === null) {
     playerTwoPlayableDeck = playerTwoCollectedCards
     playerTwoCollectedCards = []
     cleanSwap()
@@ -270,12 +269,15 @@ function warDeckSwap() {
 }
 
 function getWinner() {
-  if(playerOnePlayableDeck.length === 0 &&      playerOneCollectedCards.length === 0) {
+
+  if(playerOnePlayableDeck.length === 0 &&  playerOneCollectedCards.length === 0) {
     isWinner = true
     displayMessage.textContent = "Congrats Shredder You Won!!"
     displayMessage.style.color = "grey"
     plyOnePlayEl.classList.remove("back-red")
-    plyOneVsEl.classList.add("outine")
+    plyOneCollEl.classList.remove("back-red")
+    plyOneVsEl.className = "card medium outline"
+    plyTwoVsEl.className = "card medium outline"
 
     confetti.start(2500)
   }
@@ -284,7 +286,9 @@ function getWinner() {
     displayMessage.textContent = "Congrats Leonardo You Won!!"
     displayMessage.style.coloe = "green"
     plyTwoPlayEl.classList.remove("back-red")
-    plyTwoVsEl.classList.add("outline")
+    plyTwoCollEl.classList.remove("back-red")
+    plyTwoVsEl.className = "card medium outline"
+    plyOneVsEl.className = "card medium outline"
 
     confetti.start(2500)
   }
