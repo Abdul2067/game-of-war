@@ -42,16 +42,11 @@ function init() {
 function splitDeck() {
 
   let random = deck.sort(() => 0.5 - Math.random())
-
   let half = Math.ceil(random.length / 2)
 
     playerOnePlayableDeck = random.slice(0, half)
-    
     playerTwoPlayableDeck = random.slice(-half)
-    
 
-    // console.log(playerOnePlayableDeck)
-    // console.log(playerTwoPlayableDeck)
   }
 
 function checkValid() {
@@ -63,11 +58,10 @@ function checkValid() {
 
 
 function handleClick() {
-  if(playerOnePlayableDeck.length > 0 && !isWinner && playerOneVsCard === undefined) 
+  if(playerOnePlayableDeck.length >= 0 && !isWinner && playerOneVsCard === undefined) 
   
   {
     let randomIdx = Math.floor(Math.random()*playerOnePlayableDeck.length)
-
     let cardPicked = playerOnePlayableDeck.splice(randomIdx, 1)
 
     playerOneVsCard = cardPicked[0]
@@ -95,17 +89,14 @@ function render(cardPicked) {
   }
   
   cardToRemove = cardPicked
-  
   plyOneVsEl.classList.add(cardPicked)
 }
 
 function handleClickTwo() {
   
-  if(playerTwoPlayableDeck.length > 0 && !isWinner && playerTwoVsCard === undefined) 
-  
-  {
-    let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
+  if(playerTwoPlayableDeck.length >= 0 && !isWinner && playerTwoVsCard === undefined) {
     
+    let randomIdxTwo = Math.floor(Math.random()*playerTwoPlayableDeck.length)
     let cardPickedTwo = playerTwoPlayableDeck.splice(randomIdxTwo, 1)
     
     playerTwoVsCard = cardPickedTwo[0]
@@ -130,15 +121,14 @@ function renderTwo(cardPickedTwo) {
   if (cardToRemoveTwo !== null) {
     plyTwoVsEl.classList.remove(cardToRemoveTwo)
   }
-  cardToRemoveTwo = cardPickedTwo
 
+  cardToRemoveTwo = cardPickedTwo
   plyTwoVsEl.classList.add(cardPickedTwo)
 }
 
 
 function vsCard() {
   let playerOneValue = parseInt(playerOneVsCard.slice(1))
-
   let playerTwoValue = parseInt(playerTwoVsCard.slice(1))
 
   if(playerOneValue > playerTwoValue) {
@@ -205,13 +195,6 @@ function collAndPlaySwap() {
     playerTwoCollectedCards = []
     cleanSwap()
   }
-  console.log("--------------")
-  console.log(playerOnePlayableDeck)
-  console.log(playerOneCollectedCards)
-  console.log("--------------")
-  console.log(playerTwoPlayableDeck)
-  console.log(playerTwoCollectedCards)
-  console.log(playerOnePlayableDeck.length + playerOneCollectedCards.length + playerTwoCollectedCards.length + playerTwoPlayableDeck.length )
 }
 
 function cleanSwap() {
@@ -230,8 +213,7 @@ function cleanSwap() {
     plyTwoCollEl.classList.remove("back-red")
     plyTwoCollEl.classList.add("outline")
     plyTwoCollEl.classList.remove("shadow")
-  }
-  
+  } 
 }
 
 function isWar() {
@@ -257,7 +239,7 @@ function isWar() {
     plyOneVsEl.classList.add(playerOneVsCard[4])
     plyTwoVsEl.classList.add(playerTwoVsCard[4])
     cleanUpVs()
-  }, 1000)
+  }, 700)
 
   let playerOneValue = parseInt(playerOneVsCard[4].slice(1))
   let playerTwoValue = parseInt(playerTwoVsCard[4].slice(1))
@@ -277,28 +259,37 @@ function isWar() {
 function warDeckSwap() {
   if(playerOnePlayableDeck.length < 4) {
     playerOnePlayableDeck.push(...playerOneCollectedCards)
-    // console.log(playerOnePlayableDeck)
     playerOneCollectedCards = []
     cleanSwap()
   }
   if(playerTwoPlayableDeck.length < 4) {
     playerTwoPlayableDeck.push(...playerTwoCollectedCards)
-    // console.log(playerTwoPlayableDeck)
     playerTwoCollectedCards = []
     cleanSwap()
   }
 }
 
 function getWinner() {
-  if(playerOnePlayableDeck.length === 0 && playerOneCollectedCards.length === 0) {
+  if(playerOnePlayableDeck.length === 0 &&      playerOneCollectedCards.length === 0) {
     isWinner = true
-    displayMessage.textContent = "Congrats Player 2 You Won!!"
+    displayMessage.textContent = "Congrats Shredder You Won!!"
+    displayMessage.style.color = "grey"
+    plyOnePlayEl.classList.remove("back-red")
+    plyOneVsEl.classList.add("outine")
+
+    confetti.start(2500)
   }
   if(playerTwoPlayableDeck.length === 0 && playerTwoCollectedCards.length === 0) {
     isWinner = true
-    displayMessage.textContent = "Congrats Player 1 You Won!!"
+    displayMessage.textContent = "Congrats Leonardo You Won!!"
+    displayMessage.style.coloe = "green"
+    plyTwoPlayEl.classList.remove("back-red")
+    plyTwoVsEl.classList.add("outline")
+
+    confetti.start(2500)
   }
 }
+
 
  function toggleLightDark() {
    body.className = body.className === "light" ? "" : "light"
@@ -323,5 +314,5 @@ function rapidSolve() {
     } else {
     clearInterval(timerInterval)
     }
-  }, 100)
+  }, 1000)
 }
