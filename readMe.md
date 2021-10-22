@@ -15,7 +15,14 @@ Growing up as a kid I loved playing WAR with anyone and everyone, it was simple 
 
 ## Screenshots
 
+![Dark Mode Snapshot](/images/Game%20of%20War%20dark%20mode.png)
+![Light Mode Snapshot](images/Game%20of%20War%20light%20mode.png)
+![Gameplay](./images/Gameplay.png)
+![Wireframe](images/Game%20of%20War%20Wireframe.png)
 
+## Features
+ - Light/Dark Mode
+ - Easter Egg
 
 
 ## Technologies used:
@@ -26,8 +33,8 @@ Growing up as a kid I loved playing WAR with anyone and everyone, it was simple 
   - Animate.css
 
 ## Whats next:
-  - [ ] Add animations for the suffle and distrbution of the cards
-  - [ ] Add music and more sound effects
+  - [ ] Add animations for the shuffle and distrbution of the cards
+  - [ ] Add music and sound effects
   - [ ] Add a option to play against an AI
 
 ## Credits:
